@@ -26,6 +26,9 @@ h2 {
     height:900px;
 */
 }
+.span8 ul {
+	list-style:none;
+}
 .uppercase {
     font-family: 'Open Sans', sans-serif;
     text-transform:uppercase;
@@ -50,6 +53,7 @@ div.tout > div {
 }
 
 div.profile {
+	margin-left:10px;
     height:116px;
     width:95px;
 }
@@ -76,6 +80,7 @@ div.username a {
 }
 div.video-container {
     @include tout-elements;
+    margin-left:14px;
     width:475px;
 }
 div.video {
