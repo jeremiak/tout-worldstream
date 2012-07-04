@@ -95,17 +95,6 @@ function makeActive(eventTarget) {
 	});
 };
 
-
-
-function createElement(type, cls) {
-	var x = document.createElement(type);
-	if (typeof cls != 'undefined') {
-		x.className = cls;
-	}
-	return x
-};
-
-
 function callAjax(startPage) {
 	console.log('http://localhost/ba-simple-proxy.php?url=http://www.tout.com/api/v1/latest.json?page='+ startPage);
 	var ajax_url = 'http://www.tout.com/api/v1/latest.json?' + encodeURIComponent('per_page=15&page='+startPage);
@@ -118,87 +107,6 @@ function callAjax(startPage) {
 		}
    });
    return result;
-};
-
-function createTout(tout) {
-	tout = tout['tout'];
-
-	like_text = 'likes go here';
-
-	d = createElement('div', 'tout inactive');
-	
-	/* profile image creation */
-	prof_div = createElement('div', 'span2 profile');
-		prof_img_div = createElement('div', 'profile-img');
-			prof_img = createElement('img');
-			prof_img.src = tout['user']['avatar']['profile']['http_url'];
-		prof_img_div.appendChild(prof_img);
-		user_div = createElement('div', 'username');
-			user_link = createElement('a');
-			user_link.href = 'http://www.tout.com/u/' + tout['user']['uid'];
-			user_link.textContent = tout['user']['fullname'] || tout['user']['username'];
-		user_div.appendChild(user_link);    
-		time_div = createElement('div', 'time');
-
-		prof_div.appendChild(prof_img_div);
-		prof_div.appendChild(user_div);
-		prof_div.appendChild(time_div);
-
-	/* video element creation */
-	video_div = createElement('div', 'span6 video-container');
-	video_div.setAttribute('id', tout['uid']);
-		vid_img_div = createElement('div', 'vid-image');
-			vid_img = createElement('img');
-			vid_img.src = tout['image']['poster']['http_url'];
-			vid_img.width = tout['image']['poster']['width'];
-
-			var vid_img_margin = 0;
-			width_of_source = tout['image']['poster']['width'];
-			if (width_of_source < 474) {
-				vid_img_margin = ( 474-width_of_source )/2;
-				vid_img.style.marginLeft = vid_img_margin + 'px';
-			}
-
-		vid_img_div.appendChild(vid_img);
-		vid_div = createElement('div', 'video');
-
-	video_div.appendChild(vid_img_div);
-	video_div.appendChild(vid_div);
-
-		/* tout details element creation */
-		deets_div = createElement('div', 'tout-deets');
-			text_div = createElement('div', 'tout-text');
-			text_div.textContent =  tout['text'];
-
-			likes_div = createElement('div', 'tout-likes');
-				likes_img = createElement('img');
-				likes_img.src = 'img/thumb.png';
-				likes_text = createElement('span');
-				likes_text.textContent = like_text;
-			likes_div.appendChild(likes_img);
-			likes_div.appendChild(likes_text);
-
-			clear_div = createElement('div', 'clear');
-			clear_div.appendChild(createElement('br'));
-		deets_div.appendChild(text_div);
-		deets_div.appendChild(likes_div);
-		deets_div.appendChild(clear_div);
-
-	video_div.appendChild(deets_div);
-
-	clear = createElement('div', 'clear');
-	clear.appendChild(createElement('br'));
-
-	d.appendChild(prof_div);
-	d.appendChild(video_div);
-	d.appendChild(clear);
-
-	$('.vid-image').bind('click', function(e) {
-		$e = $(e.target).parents('.vid-image');
-		makeActive($e);
-	});
-	$('.span8').append(d);
-
 };
 
 function loadMoreTouts(startPage) {
