@@ -1,0 +1,199 @@
+$headline-blue: rgb(33, 154, 213);
+$lightBlue: rgb(64, 152, 229);
+
+body {
+    background-color: rgb(241, 241, 241);
+}
+div.black-back {
+    background-color: rgb(26, 28, 29);
+    margin-bottom:20px;
+}
+div.logo {
+    width:1100px;
+    margin:0 auto;
+}
+h1 {
+    color: $headline-blue;
+    font-size:1.2em;
+}
+h2 {
+     border-bottom: 3px solid #ccc; 
+ }
+.span8 {
+    margin-bottom:100px;
+/*    overflow-x:hidden;
+    overflow-y:scroll;
+    height:900px;
+*/
+}
+.uppercase {
+    font-family: 'Open Sans', sans-serif;
+    text-transform:uppercase;
+}
+div.tout {
+    border-bottom:1px dotted #ccc;
+    display:block;
+    padding-top:10px;
+    padding-bottom:10px;
+
+}
+div.active div.video {
+    height:350px;
+}
+div.tout > div {
+    display:inline;
+}
+@mixin tout-elements {
+    background-color:white;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+    border-radius:4px;
+}
+
+div.profile {
+    height:116px;
+    width:95px;
+}
+$padding: 8px;
+div.profile-img {
+    padding-left: $padding;
+    padding-top: $padding;
+    padding-bottom: $padding;
+
+    @include tout-elements;
+}
+div.profile img {
+    $dimension: 75px;
+    border:1px solid black;
+    height: $dimension;
+    width: $dimension;
+}
+div.username {
+    margin-top:$padding;
+}
+div.username a {
+    color: $lightBlue;
+    text-decoration:none;
+}
+div.video-container {
+    @include tout-elements;
+    width:475px;
+}
+div.video {
+    padding:$padding;
+}
+div.video div.play-button {
+    background-color:black;
+    width:80px;
+    height:80px;
+    border-radius:80px;
+}
+div.active div.vid-image {
+    display: none;
+}
+div.inactive div.vid-image {
+    background-color:black;
+    height:200px;
+    overflow:hidden;
+}
+div.inactive div.vid-image img{
+    margin: 0 auto;
+}
+div.inactive div.video {
+    display:none;
+}
+div.tout-deets {
+    display:inline;
+    margin:0 auto;
+}
+div.tout-deets > div {
+    padding:none;
+    margin:none;
+}
+div.tout-text {
+    float:left;
+    margin-left:15px;
+    width:330px;
+}
+div.tout-likes {
+    float:right;
+    width:60px;
+    margin-right:10px;
+}
+div#touts-sections {
+    margin-top:30px;
+}
+div.load-more {
+    background-color: #E3E3E3;
+    border-radius: 5px;
+    margin-bottom:40px;
+    padding:10px;
+    width:100%;
+    min-height:30px;
+}
+div.load-more span.load-more-touts {
+    float:left;
+}
+div.load-more span.tout-count {
+    float:right;
+}
+div.trending-video {
+    @include tout-elements;
+    float:left;
+    width:140px;
+}
+div.trending-video-info {
+    float:right;
+    width:150px;
+}
+.trending-text {
+    color:$lightBlue;
+    font-weight:bold;
+}
+.trending-touter, .trending-touter a{
+    color:black;
+    font-weight:bold;
+    text-decoration:none;
+}
+div.ul-container {
+    background-color: rgb(228, 228, 228);
+    border-radius: 4px;
+    margin-top:15px;
+    width:300px;
+    overflow-x:scroll;
+    overflow-y:hidden;
+}
+div.ul-container h3 {
+    font-weight:normal;
+    margin-left:18px;
+    margin-top:4px;
+}
+.touts-section {
+    list-style-type:none;
+    margin-top:10px;
+    margin-left:0px;
+    padding-top:8px;
+    padding-left:8px;
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:140px;
+    width:670px;
+}
+.touts-section .tout-in-section {
+    @include tout-elements;
+    float:left;
+    margin-right:8px;
+    width: 126px;
+}
+
+div div.clear {
+    clear:both;
+    display:block;
+}
+
+/* overriding video.js */
+.video-js .vjs-tech {
+    position:static;
+}
+img.vjs-poster {
+    display:none;
+}

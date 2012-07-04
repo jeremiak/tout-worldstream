@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+    <head>
+        <title>WSJ World Stream -- Prototype</title>
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" type="text/css">
+        <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+    
+        <link rel="stylesheet" href="css/styles.css" />
+        
+    </head>
+    <body>
+        <div class="black-back">
+            <div class="logo"><img src="img/wsj-banner.png" /></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="span12"><h1 class="uppercase">Real time Tout updates from across the Globe</h1></div>
+            </div>
+            <div class="row">
+                <div class="span8"><h2 class="uppercase">World Stream</h2>
+                        <!--
+                        <div class="load-more">
+                            <span class="load-more-touts"><a href="#" id="show-more-link" onClick="loadMoreTouts(<?php print 2; ?>)">Show More</a></span><span class="tout-count"><?php print "Showing " . ($pagination->current_page * $pagination->per_page) . " of " . ($pagination->total_entries) . " touts"; ?></span>
+                            <div class="clear">&nbsp;</div>
+                        </div>
+                        -->
+                </div>
+                <div class="span4">
+                    <div id="trending-today">
+                        <h2 class="uppercase">Trending Today</h2>
+                        <?php
+                            $rest_url = "http://www.tout.com/api/v1/search/touts.json?q=wsj&per_page=3";
+                            $results = json_decode(file_get_contents($rest_url));
+                            $touts = $results->touts;
+                            $num = 0;
+
+                            foreach($touts as $tout) {
+                                $profile_img_src = $tout->tout->user->avatar->profile->http_url;
+                                $fullname = $tout->tout->user->fullname;
+                                $uid = $tout->tout->user->uid;
+                                
+                                $tout_text = $tout->tout->text;
+                                $video_img_src = $tout->tout->image->thumbnail->http_url;
+                                $video_src = $tout->tout->video->mp4->http_url;
+                                $video_create_date = date('m/d/Y',strtotime($tout->tout->recorded_at));
+
+
+                                $tout_width = 124;
+                                $tout_height = ($tout_width * $tout->tout->video->mp4->height) / ($tout->tout->video->mp4->width);    
+                        ?>
+                        <div class="tout">
+                            <div class="trending-video">
+                                <div class="video">
+                                    <video id="<?php print $tout->tout->uid ?>" class="video-js vjs-default-skin" preload="auto" width="<?php print $tout_width; ?>px" height="<?php print $tout_height; ?>px" poster="<?php print $video_img_src; ?>" data-setup="{}">
+                                        <source src="<?php print $video_src; ?>" type='video/mp4'>
+                                        <div class="vjs-big-play-button"></div>
+                                    </video>
+                                </div> 
+                            </div>
+                            <div class="trending-video-info">
+                                <span class="trending-text"><p><?php print $tout_text; ?></p></span>
+                                <span class="trending-create-date"><p><?php print $video_create_date; ?></p></span> 
+                                <span class="trending-touter">By: <a class="uppercase" href="http://www.tout.com/u/<?php print $uid;  ?>"><?php print $fullname; ?></a></span>
+                            </div>
+                            <div class="clear"><br /></div>    
+                        </div>
+<?php
+                                $num++;
+                            }
+                        ?>
+                    </div>
+                    <div id="touts-sections">
+                        <h2 class="uppercase">Touts by Section</h2>
+                        <div class="ul-container"> 
+                            <h3 class="uppercase">Global Markets</h3>
+                            <ul class="touts-section">
+                                <?php
+                                    $rest_url = "http://www.tout.com/api/v1/search/touts.json?q=shaq&per_page=10";
+                                    $results = json_decode(file_get_contents($rest_url));
+                                    $touts = $results->touts;
+                                    $num = 0;
+                                    foreach($touts as $tout) {
+                                        if($num<5){
+                                            $video_img_src = $tout->tout->image->thumbnail->http_url;
+                                            $video_src = $tout->tout->video->mp4->http_url;
+
+                                            $tout_width = 110;
+                                            $tout_height = ($tout_width * $tout->tout->video->mp4->height) / ($tout->tout->video->mp4->width);    
+                                            
+                                            if ($tout_height < 84 && $tout_height > 80) { 
+                                    ?>
+                                        <li class="tout-in-section">
+                                           <div class="video">
+                                                <video id="<?php print $tout->tout->uid ?>" class="video-js vjs-default-skin" preload="auto" width="<?php print $tout_width; ?>px" height="<?php print $tout_height; ?>px" poster="<?php print $video_img_src; ?>" data-setup="{}">
+                                                    <source src="<?php print $video_src; ?>" type='video/mp4'>
+                                                </video>
+                                            </div> 
+                                        </li>
+                                    <?php
+                                            }
+                                            $num+=1;
+                                        }    
+                                    }
+                                ?>
+                            </ul>
+                        </div>
+                        <div class="ul-container"> 
+                            <h3 class="uppercase">Personal Finance</h3>
+                            <ul class="touts-section">
+                                <?php
+                                    $rest_url = "http://www.tout.com/api/v1/search/touts.json?q=tout&per_page=10";
+                                    $results = json_decode(file_get_contents($rest_url));
+                                    $touts = $results->touts;
+                                    $num = 0;
+
+                                    foreach($touts as $tout) {
+                                        $video_img_src = $tout->tout->image->thumbnail->http_url;
+                                        $video_src = $tout->tout->video->mp4->http_url;
+
+                                        $tout_width = 110;
+                                        $tout_height = ($tout_width * $tout->tout->video->mp4->height) / ($tout->tout->video->mp4->width);    
+                                        
+                                        if ($tout_height < 84 && $tout_height > 80 && $num<5) { 
+                                ?>
+                                    <li class="tout-in-section">
+                                       <div class="video">
+                                            <video id="<?php print $tout->tout->uid ?>" class="video-js vjs-default-skin" preload="auto" width="<?php print $tout_width; ?>px" height="<?php print $tout_height; ?>px" poster="<?php print $video_img_src; ?>" data-setup="{}">
+                                                <source src="<?php print $video_src; ?>" type='video/mp4'>
+                                            </video>
+                                        </div> 
+                                    </li>
+                                <?php
+                                        $num++;
+                                        }    
+                                    }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://vjs.zencdn.net/c/video.js"></script>
+        <script src="/lib/jquery.js"></script>
+        <script src="/lib/underscore/underscore.js"></script>
+        <script src="/lib/backbone/backbone.js"></script>
+        <!--	<script src="js/tout_video.js"></script> -->
+
+        <script src="js/stream.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+        	var paginationState = 1;
+			console.log('doc ready');
+			loadMoreTouts(paginationState);
+			
+			$('.vid-image').bind('click', function(e) {
+				$e = $(e.target).parents('.vid-image');
+				makeActive($e);
+			});
+		
+			$(document).scroll(function() { 
+				endlessScroll(paginationState);  
+			});
+		});
+        </script>
+    </body>
+
+</html>
