@@ -19,6 +19,39 @@
             </div>
             <div class="row">
                 <div class="span8"><h2 class="uppercase">World Stream</h2>
+                    <script id="main-template" type="text/template">
+                        <ul>
+							<% for(var i=0; i < touts.length; i++) { %>
+								<% var tout = touts[i].attributes; %>
+								<li>
+									<div class="tout inactive">
+										<div class="span2 profile">
+											<div class="profile-img">
+												<img src="<% print(tout.user.avatar.profile.http_url) %>">
+											</div>
+											<div class="username"><a href="http://www.tout.com/u/<% print(tout.user.uid) %>"><% print(tout.user.fullname || tout.user.friendly_name) %></a></div>
+											<div class="time"></div>
+										</div>
+									<div class="span6 video-container" id="<% print(tout.uid) %>">
+										<div class="vid-image">
+											<img src="<% print(tout.image.poster.http_url) %>" width="272" style="margin-left: 101px; ">
+										</div>
+										<div class="video"></div>
+											<div class="tout-deets">
+												<div class="tout-text"><% print(tout.text) %></div>
+												<div class="tout-likes">
+												<img src="img/thumb.png"><span><% print(tout.likes_count) %></span>
+											</div>
+											<div class="clear"><br></div>
+										</div>
+									</div>
+									<div class="clear"><br></div>
+									</div>
+								</li>
+							<% } %>
+						</ul>
+                    </script>
+                        
                         <!--
                         <div class="load-more">
                             <span class="load-more-touts"><a href="#" id="show-more-link" onClick="loadMoreTouts(<?php print 2; ?>)">Show More</a></span><span class="tout-count"><?php print "Showing " . ($pagination->current_page * $pagination->per_page) . " of " . ($pagination->total_entries) . " touts"; ?></span>
