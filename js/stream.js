@@ -28,61 +28,71 @@ var MainToutView = ToutView.extend({
 		'click': 'togglePlay'
 	},
 	
-	togglePlay: function() {
-		var active = this.model.attributes.uid == app.active;
-		var x = $('#vid-'+this.model.attributes.uid);
+	makeActive: function() {
+		var parentDiv = $('#vid-'+this.model.attributes.uid);
 		
-		if (active==false) {
+		// check to see if no videos are currently playing
+		if (app.active != '') {
+			// super hacky and definitely shouldn't be in a single tout view but gotta gooo
+			// pause active video
+			_V_(app.active).pause();
 			
-			// check to see if no videos are currently playing
-			if (app.active != '') {
-				// super hacky and definitely shouldn't be in a single tout view but gotta gooo
-				// pause active video
-				_V_(app.active).pause();
-				
-				// remove video player
-				$('#vid-' + app.active).children('.video-player').remove();
-				var y = $('#'+app.active);
-				var children = y.children();
-				for (var i=0; i<children.length; i++) {
-					$(children[i]).show();
-				}
-				// end of shite
-			}
-			
-			// apply the video data to the video template
-			var v = _.template($('#video-player').html(), this.model.toJSON());
-			
-			// hide the poster image as well as the tout details
-			var children = x.children();
-			for (var i=0; i<children.length; i++) {
-				$(children[i]).hide();
-			}
-			
-			// add the video player
-			x.prepend(v);
-			
-			// when the video player is ready, set to zero and then play
-			var myPlayer = _V_(this.model.attributes.uid);
-			_V_(this.model.attributes.uid, {"controls": true, "autoplay": true}, function() {
-				this.currentTime(0);
-				this.play();
-			});
-			
-			// make sure the global scope knows which video is currently active
-			app.active = this.model.attributes.uid; 
-		}
-		else if(active==true) {
-			var children = x.children();
-			
-			_V_(this.model.attributes.uid).pause();
-			$('video#' + this.model.get('uid')).parents('.video-player').remove();
-			var children = x.children();
+			// remove video player
+			$('#vid-' + app.active).children('.video-player').remove();
+			var y = $('#'+app.active);
+			var children = y.children();
 			for (var i=0; i<children.length; i++) {
 				$(children[i]).show();
 			}
+			// end of shite
+		}
+		
+		// apply the video data to the video template
+		var v = _.template($('#video-player').html(), this.model.toJSON());
+		
+		// hide the poster image as well as the tout details
+		var children = parentDiv.children();
+		for (var i=0; i<children.length; i++) {
+			$(children[i]).hide();
+		}
+		
+		// add the video player
+		x.prepend(v);
+		
+		// when the video player is ready, set to zero and then play
+		var myPlayer = _V_(this.model.attributes.uid);
+		_V_(this.model.attributes.uid, {"controls": true, "autoplay": true}, function() {
+			this.currentTime(0);
+			this.play();
+		});
+		
+		// make sure the global scope knows which video is currently active
+		app.active = this.model.attributes.uid;
+	
+	},
+	
+	makeInactive: function() {
+		var parentDiv = $('#vid-'+this.model.attributes.uid);
+		var children = parentDiv.children();
 			
-			app.active = '';
+		_V_(this.model.attributes.uid).pause();
+		$('video#' + this.model.get('uid')).parents('.video-player').remove();
+		var children = parentDiv.children();
+		for (var i=0; i<children.length; i++) {
+			$(children[i]).show();
+		}
+		
+		app.active = '';
+	},
+	
+	togglePlay: function() {
+		var active = this.model.attributes.uid == app.active;
+		
+		if (active==false) {
+			 makeActive();
+		}
+		else if(active==true) {
+			makeInactive();	
 		}
 	}
 });
