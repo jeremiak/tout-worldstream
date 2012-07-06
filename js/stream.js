@@ -57,7 +57,7 @@ var MainToutView = ToutView.extend({
 		}
 		
 		// add the video player
-		x.prepend(v);
+		parentDiv.prepend(v);
 		
 		// when the video player is ready, set to zero and then play
 		var myPlayer = _V_(this.model.attributes.uid);
@@ -89,10 +89,10 @@ var MainToutView = ToutView.extend({
 		var active = this.model.attributes.uid == app.active;
 		
 		if (active==false) {
-			 makeActive();
+			 this.makeActive();
 		}
 		else if(active==true) {
-			makeInactive();	
+			this.makeInactive();	
 		}
 	}
 });
