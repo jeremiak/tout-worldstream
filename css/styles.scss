@@ -26,7 +26,7 @@ h2 {
     height:900px;
 */
 }
-.span8 ul {
+ul {
 	list-style:none;
 }
 .uppercase {
@@ -103,9 +103,21 @@ div.inactive div.vid-image {
 div.inactive div.vid-image img{
     margin: 0 auto;
 }
-div.inactive div.video {
-    display:none;
+
+ul.share-bar {
+	background-color: rgba(0, 0, 0, 0.5);
+	margin-left:0px;
+	width:475px;
 }
+
+$share-bar-padding: 30px;	
+ul.share-bar li {
+	display:inline;
+	margin-top:-35px;
+	line-height:35px;
+	padding-left:75px;
+}
+
 div.tout-deets {
     display:inline;
     margin:0 auto;
@@ -124,6 +136,11 @@ div.tout-likes {
     width:60px;
     margin-right:10px;
 }
+
+div.tout-likes span {
+	padding-top:5px;
+}
+
 div#touts-sections {
     margin-top:30px;
 }
@@ -144,11 +161,11 @@ div.load-more span.tout-count {
 div.trending-video {
     @include tout-elements;
     float:left;
-    width:140px;
+    width:130px;
 }
 div.trending-video-info {
     float:right;
-    width:150px;
+    width:130px;
 }
 .trending-text {
     color:$lightBlue;
