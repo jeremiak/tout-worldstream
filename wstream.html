@@ -8,6 +8,7 @@
     
         <link rel="stylesheet" href="css/styles.css">
         
+        <script src="http://vjs.zencdn.net/c/video.js"></script>
     </head>
     <body>
         <div class="black-back">
@@ -22,7 +23,7 @@
                 	<h2 class="uppercase">World Stream</h2> 
 					<script id="video-player" type="text/template">
 						<div class="video-player">
-							<video id="<% print(uid) %>" class="video-js" height="350px">
+							<video id="<% print(uid) %>" class="video-js vjs-default-skin" height="<% print(video.mp4.height) %>px" width="<% print(video.mp4.width) %>px">
 								<source src="<% print(video.mp4.http_url) %>" type='video/mp4' />
 							</video>
 							<ul class="share-bar arrows-on-video">
@@ -112,7 +113,6 @@
                 </div>
             </div>
         </div>
-        <script src="http://vjs.zencdn.net/c/video.js"></script>
         <script src="/lib/jquery.js"></script>
         <script src="/lib/underscore/underscore.js"></script>
         <script src="/lib/backbone/backbone.js"></script>

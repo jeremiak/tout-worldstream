@@ -29,8 +29,6 @@ var MainToutView = ToutView.extend({
 	},
 	
 	makeActive: function() {
-		var parentDiv = $('#vid-'+this.model.attributes.uid);
-		
 		// check to see if no videos are currently playing
 		if (app.active != '') {
 			// super hacky and definitely shouldn't be in a single tout view but gotta gooo
@@ -38,12 +36,10 @@ var MainToutView = ToutView.extend({
 			_V_(app.active).pause();
 			
 			// remove video player
-			$('#vid-' + app.active).children('.video-player').remove();
-			var y = $('#'+app.active);
-			var children = y.children();
-			for (var i=0; i<children.length; i++) {
-				$(children[i]).show();
-			}
+			var parentDiv = $('#vid-'+app.active);
+			parentDiv.find('.video-player').remove();
+			parentDiv.find('.vid-image').show();
+			parentDiv.find('.tout-deets').show();
 			// end of shite
 		}
 		
@@ -51,18 +47,16 @@ var MainToutView = ToutView.extend({
 		var v = _.template($('#video-player').html(), this.model.toJSON());
 		
 		// hide the poster image as well as the tout details
-		var children = parentDiv.children();
-		for (var i=0; i<children.length; i++) {
-			$(children[i]).hide();
-		}
+		var parentDiv = $('#vid-'+this.model.attributes.uid);
+		parentDiv.children('.vid-image').hide();
+		parentDiv.children('.tout-deets').hide();
 		
 		// add the video player
 		parentDiv.prepend(v);
 		
 		// when the video player is ready, set to zero and then play
 		var myPlayer = _V_(this.model.attributes.uid);
-		_V_(this.model.attributes.uid, {"controls": true, "autoplay": true}, function() {
-			this.currentTime(0);
+		myPlayer.ready(function() {
 			this.play();
 		});
 		
@@ -72,22 +66,20 @@ var MainToutView = ToutView.extend({
 	},
 	
 	makeInactive: function() {
+		//_V_(this.model.attributes.uid).pause();
+		//$('video#' + this.model.get('uid')).parents('.video-player').remove();
+		
+		console.log('#vid-'+this.model.attributes.uid);
 		var parentDiv = $('#vid-'+this.model.attributes.uid);
-		var children = parentDiv.children();
-			
-		_V_(this.model.attributes.uid).pause();
-		$('video#' + this.model.get('uid')).parents('.video-player').remove();
-		var children = parentDiv.children();
-		for (var i=0; i<children.length; i++) {
-			$(children[i]).show();
-		}
+		parentDiv.find('.vid-image').show();
+		parentDiv.find('.tout-deets').show();
 		
 		app.active = '';
 	},
 	
 	togglePlay: function() {
 		var active = this.model.attributes.uid == app.active;
-		
+		console.log(active);
 		if (active==false) {
 			 this.makeActive();
 		}
@@ -111,9 +103,9 @@ var app = {
 	paginationState: 1,		// holds the current page for the main stream to enable endless scrolling
 	streamID: {
 		main: '579h3s',
-		trending: '579h3s',
-		section1: '579h3s',
-		section2: '579h3s'
+		trending: 'r7stfb',
+		section1: 'gc5hk1',
+		section2: 'k6xico'
 		},
 	
 	callAjax: function (streamID, startPage, perPage) {
@@ -121,8 +113,8 @@ var app = {
 			perPage = 15;
 		}
 		
-	//	var ajax_url = 'http://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?' + encodeURIComponent('per_page=15&page='+startPage);
-		var ajax_url = 'http://api.tout.com/api/v1/latest.json?' + encodeURIComponent('per_page='+perPage+'&page='+startPage);
+		var ajax_url = 'http://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?' + encodeURIComponent('per_page='+perPage+'&page='+startPage);
+	//	var ajax_url = 'http://api.tout.com/api/v1/latest.json?' + encodeURIComponent('per_page='+perPage+'&page='+startPage);
 		var result="";
 		$.ajax({
 			url:'http://localhost/ba-simple-proxy.php?url=' + ajax_url,
