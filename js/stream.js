@@ -30,7 +30,7 @@ var MainToutView = ToutView.extend({
 	
 	togglePlay: function() {
 		var active = this.model.attributes.uid == app.active;
-		var x = $('#'+this.model.attributes.uid);
+		var x = $('#vid-'+this.model.attributes.uid);
 		
 		if (active==false) {
 			
@@ -41,7 +41,7 @@ var MainToutView = ToutView.extend({
 				_V_(app.active).pause();
 				
 				// remove video player
-				$('#' + app.active).children('.video-player').remove();
+				$('#vid-' + app.active).children('.video-player').remove();
 				var y = $('#'+app.active);
 				var children = y.children();
 				for (var i=0; i<children.length; i++) {
@@ -52,7 +52,6 @@ var MainToutView = ToutView.extend({
 			
 			// apply the video data to the video template
 			var v = _.template($('#video-player').html(), this.model.toJSON());
-			x.prepend(v);
 			
 			// hide the poster image as well as the tout details
 			var children = x.children();
@@ -61,17 +60,14 @@ var MainToutView = ToutView.extend({
 			}
 			
 			// add the video player
-			
+			x.prepend(v);
 			
 			// when the video player is ready, set to zero and then play
-			var self = this;
-			setTimeout(function() {
-			var myPlayer = _V_(self.model.attributes.uid);
-			myPlayer.ready(function() {
-				myPlayer.currentTime(0);
-				myPlayer.play();
+			var myPlayer = _V_(this.model.attributes.uid);
+			_V_(this.model.attributes.uid, {"controls": true, "autoplay": true}, function() {
+				this.currentTime(0);
+				this.play();
 			});
-			}, 0);
 			
 			// make sure the global scope knows which video is currently active
 			app.active = this.model.attributes.uid; 
@@ -99,6 +95,7 @@ var TrendingToutView = ToutView.extend({
 var SectionToutView = ToutView.extend({
 	template: _.template($('#lower-right-template').html())
 });
+
 var app = {
 	active: '',				// holds the currently playing so its available in the global scope
 	paginationState: 1,		// holds the current page for the main stream to enable endless scrolling

@@ -92,9 +92,6 @@ div.video div.play-button {
     height:80px;
     border-radius:80px;
 }
-div.active div.vid-image {
-    display: none;
-}
 div.inactive div.vid-image {
     background-color:black;
     height:200px;
@@ -103,7 +100,9 @@ div.inactive div.vid-image {
 div.inactive div.vid-image img{
     margin: 0 auto;
 }
-
+div.video-player {
+	background-color:black;
+}
 ul.share-bar {
 	background-color: rgba(0, 0, 0, 0.5);
 	margin-left:0px;
