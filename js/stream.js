@@ -38,6 +38,7 @@ var MainToutView = ToutView.extend({
 			// remove video player
 			var parentDiv = $('#vid-'+app.active);
 			parentDiv.find('.video-player').remove();
+			// but show the poster and Tout details
 			parentDiv.find('.vid-image').show();
 			parentDiv.find('.tout-deets').show();
 			// end of shite
@@ -62,7 +63,6 @@ var MainToutView = ToutView.extend({
 		
 		// make sure the global scope knows which video is currently active
 		app.active = this.model.attributes.uid;
-	
 	},
 	
 	makeInactive: function() {
@@ -100,6 +100,7 @@ var SectionToutView = ToutView.extend({
 
 var app = {
 	active: '',				// holds the currently playing so its available in the global scope
+	currentCollectionIndex: 0,
 	paginationState: 1,		// holds the current page for the main stream to enable endless scrolling
 	streamID: {
 		main: '579h3s',
@@ -109,7 +110,7 @@ var app = {
 		},
 	
 	callAjax: function (streamID, startPage, perPage) {
-		if (perPage == null) {
+		if (perPage == undefined) {
 			perPage = 15;
 		}
 		

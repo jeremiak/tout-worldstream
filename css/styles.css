@@ -97,6 +97,7 @@ div.video-player {
 ul.share-bar {
   background-color: rgba(0, 0, 0, 0.5);
   margin-left: 0px;
+  padding-bottom: 10px;
   width: 475px; }
 
 ul.share-bar li {
