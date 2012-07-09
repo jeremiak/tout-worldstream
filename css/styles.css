@@ -1,20 +1,37 @@
 body {
   background-color: #f1f1f1; }
 
-div.black-back {
-  background-color: #1a1c1d;
-  margin-bottom: 20px; }
+a {
+  color: #093d72;
+  text-decoration: none; }
 
-div.logo {
-  width: 1100px;
-  margin: 0 auto; }
+a:hover {
+  color: #c74b15;
+  text-decoration: none; }
+
+a:visited {
+  color: #093d72;
+  text-decoration: none; }
 
 h1 {
   color: #219ad5;
   font-size: 1.2em; }
 
 h2 {
+  font-family: 'Arial', sans-serif;
+  font-size: 16pt;
+  font-weight: 900;
   border-bottom: 3px solid #ccc; }
+
+h2:hover {
+  color: #c74b15; }
+
+ul {
+  list-style: none; }
+
+.uppercase {
+  /*    font-family: 'Open Sans', sans-serif; */
+  text-transform: uppercase; }
 
 .span8 {
   margin-bottom: 100px;
@@ -23,12 +40,13 @@ h2 {
       height:900px;
   */ }
 
-ul {
-  list-style: none; }
+div.black-back {
+  background-color: #1a1c1d;
+  margin-bottom: 20px; }
 
-.uppercase {
-  font-family: 'Open Sans', sans-serif;
-  text-transform: uppercase; }
+div.logo {
+  width: 1100px;
+  margin: 0 auto; }
 
 div.tout {
   border-bottom: 1px dotted #ccc;
@@ -63,10 +81,12 @@ div.profile img {
 div.username {
   margin-top: 8px; }
 
+/*
 div.username a {
-  color: #4098e5;
-  text-decoration: none; }
-
+    color: $lightBlue;
+    text-decoration:none;
+}
+*/
 div.video-container {
   background-color: white;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
