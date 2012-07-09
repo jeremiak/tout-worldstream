@@ -25,66 +25,81 @@ var MainToutView = ToutView.extend({
 	template:  _.template($('#main-template').html()),
 	
 	events: {
-		'click': 'togglePlay'
+		'click': 'makeActive'
 	},
 	
 	makeActive: function() {
-		// check to see if no videos are currently playing
-		if (app.active != '') {
+		var active = this.model.attributes.uid == app.active.id;
+		var state = app.active.state;
+		
+		if (active==true) {
+			var myPlayer = _V_(this.model.attributes.uid);
+			if (state=='paused') {
+				myPlayer.play();
+				app.active.state = 'playing';
+			}
+			else if (state=='playing') {
+				var timeLeft = myPlayer.duration() - myPlayer.currentTime();
+			
+				if (timeLeft != 0) {
+					myPlayer.pause();
+					app.active.state = 'paused';
+				}
+			}
+		}
+		else if (active==false) {
 			// super hacky and definitely shouldn't be in a single tout view but gotta gooo
 			// pause active video
-			_V_(app.active).pause();
+			if (app.active.id != '' ) {
+				_V_(app.active.id).pause();
+				
+				// remove video player
+				var parentDiv = $('#vid-'+app.active.id);
+				parentDiv.find('.video-player').remove();
+				// but show the poster and Tout details
+				parentDiv.find('.vid-image').show();
+				parentDiv.find('.tout-deets').show();
+				// end of shite
+			}
+		
+			// apply the video data to the video template
+			var v = _.template($('#video-player').html(), this.model.toJSON());
 			
-			// remove video player
-			var parentDiv = $('#vid-'+app.active);
-			parentDiv.find('.video-player').remove();
-			// but show the poster and Tout details
-			parentDiv.find('.vid-image').show();
-			parentDiv.find('.tout-deets').show();
-			// end of shite
-		}
-		
-		// apply the video data to the video template
-		var v = _.template($('#video-player').html(), this.model.toJSON());
-		
-		// hide the poster image as well as the tout details
-		var parentDiv = $('#vid-'+this.model.attributes.uid);
-		parentDiv.children('.vid-image').hide();
-		parentDiv.children('.tout-deets').hide();
-		
-		// add the video player
-		parentDiv.prepend(v);
-		
-		// when the video player is ready, set to zero and then play
-		var myPlayer = _V_(this.model.attributes.uid);
-		myPlayer.ready(function() {
-			this.play();
-		});
-		
-		// make sure the global scope knows which video is currently active
-		app.active = this.model.attributes.uid;
-	},
-	
-	makeInactive: function() {
-		//_V_(this.model.attributes.uid).pause();
-		//$('video#' + this.model.get('uid')).parents('.video-player').remove();
-		
-		console.log('#vid-'+this.model.attributes.uid);
-		var parentDiv = $('#vid-'+this.model.attributes.uid);
-		parentDiv.find('.vid-image').show();
-		parentDiv.find('.tout-deets').show();
-		
-		app.active = '';
-	},
-	
-	togglePlay: function() {
-		var active = this.model.attributes.uid == app.active;
-		console.log(active);
-		if (active==false) {
-			 this.makeActive();
-		}
-		else if(active==true) {
-			this.makeInactive();	
+			// hide the poster image as well as the tout details
+			var parentDiv = $('#vid-'+this.model.attributes.uid);
+			parentDiv.children('.vid-image').hide();
+			parentDiv.children('.tout-deets').hide();
+			
+			// add the video player
+			parentDiv.prepend(v);
+			
+			// when the video player is ready, set to zero and then play
+			var myPlayer = _V_(this.model.attributes.uid);
+			myPlayer.ready(function() {
+				var top = $(parentDiv).position().top;
+				console.log(top-20);
+				$(document).scrollTop(top-20);
+							
+				myPlayer.addEvent('ended', function(e) {
+					var $next = $('#' + e.target.id).parents('.tout').next();
+					app.active.state = 'ended';
+					
+					
+					parentDiv.find('.video-player').remove();
+					parentDiv.find('.vid-image').show();
+					parentDiv.find('.tout-deets').show();
+					
+					$next.trigger('click');
+					;
+				});
+				
+				this.play();
+				app.active.state = 'playing';
+				
+			});
+			
+			// make sure the global scope knows which video is currently active
+			app.active.id = this.model.attributes.uid;
 		}
 	}
 });
@@ -99,7 +114,10 @@ var SectionToutView = ToutView.extend({
 });
 
 var app = {
-	active: '',				// holds the currently playing so its available in the global scope
+	active: { // holds the currently playing so its available in the global scope
+		id: '',
+		state: ''
+	},				
 	currentCollectionIndex: 0,
 	paginationState: 1,		// holds the current page for the main stream to enable endless scrolling
 	streamID: {
