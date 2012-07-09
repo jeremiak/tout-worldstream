@@ -136,7 +136,8 @@ var app = {
 	//	var ajax_url = 'http://api.tout.com/api/v1/latest.json?' + encodeURIComponent('per_page='+perPage+'&page='+startPage);
 		var result="";
 		$.ajax({
-			url:'http://localhost/ba-simple-proxy.php?url=' + ajax_url,
+	//		url:'http://localhost/ba-simple-proxy.php?url=' + ajax_url,
+			url: ajax_url,
 			async: false,
 			success:function(data) {
 				result = data; 
