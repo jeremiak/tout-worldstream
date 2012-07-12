@@ -77,20 +77,26 @@ var MainToutView = ToutView.extend({
 			
 			// hide the poster image as well as the tout details
 			var parentDiv = $('#vid-'+this.model.attributes.uid);
-			parentDiv.children('.vid-image').hide();
-			parentDiv.children('.tout-deets').hide();
-			
 			// add the video player
 			parentDiv.prepend(v);
 			
 			// when the video player is ready, set to zero and then play
 			var myPlayer = _V_(this.model.attributes.uid);
 			myPlayer.ready(function() {
-				var top = $(parentDiv).position().top;
+				var top = $(parentDiv).position().top, 
+				$vidPlayer = parentDiv.find('.video-player');
+				
 				console.log(top-20);
 				$(document).scrollTop(top-20);
+				
+				parentDiv.find('.vid-image').hide();
+				parentDiv.find('.tout-deets').hide();
+				parentDiv.find('.share-bar-container').hide();
+				
+				$vidPlayer.css('visibility', 'visible');
+				$vidPlayer.animate({height: 300}, 'fast');
 							
-				myPlayer.addEvent('ended', function(e) {
+				this.addEvent('ended', function(e) {
 					var $next = $('#' + e.target.id).parents('.tout').next();
 					app.active.state = 'ended';
 					
