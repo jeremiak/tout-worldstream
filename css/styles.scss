@@ -125,9 +125,15 @@ div.inactive div.vid-image img{
 div.video-player {
 	background-color:black;
 }
+.share-bar-container {
+	background-color:black;
+	height:45px;
+	overflow-y:hidden;
+}
 ul.share-bar {
 	background-color: rgba(0, 0, 0, 0.5);
 	margin-left:0px;
+	margin-top:45px;
 	padding-bottom:10px;
 	width:475px;
 }

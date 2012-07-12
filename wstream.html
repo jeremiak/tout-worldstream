@@ -26,12 +26,6 @@
 							<video id="<% print(uid) %>" class="video-js vjs-default-skin" height="<% print(video.mp4.height) %>px" width="<% print(video.mp4.width) %>px">
 								<source src="<% print(video.mp4.http_url) %>" type='video/mp4' />
 							</video>
-							<ul class="share-bar arrows-on-video">
-								<li><a href="http://facebook.com/sharer.php?u=http://staging.kicktag.com/m/<% print(uid) %> target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/facebook.png"></a></li>
-								<li><a href="http://www.tout.com/m/<% print(uid) %>/share/twitter" target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/twitter.png"></a></li>
-								<li><a href="http://www.tout.com/m/<% print(uid) %>/share/pinterest" target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/pintrest.png"></a></li>
-								<li><a href="http://www.tout.com/m/<% print(uid) %>" target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/link.png"></a></li>
-							</ul>
 						</div>
 					</script>
 					<script id="main-template" type="text/template">
@@ -49,6 +43,14 @@
 								<button class="button">Share <img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share_tout.png"></button>
 								-->
 							</div>
+							<div class="share-bar-container">
+								<ul class="share-bar arrows-on-video">
+									<li><a href="http://facebook.com/sharer.php?u=http://staging.kicktag.com/m/<% print(uid) %> target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/facebook.png"></a></li>
+									<li><a href="http://www.tout.com/m/<% print(uid) %>/share/twitter" target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/twitter.png"></a></li>
+									<li><a href="http://www.tout.com/m/<% print(uid) %>/share/pinterest" target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/pintrest.png"></a></li>
+									<li><a href="http://www.tout.com/m/<% print(uid) %>" target="_blank"><img src="//d27rwemj1dwel.cloudfront.net/assets/widget/share/link.png"></a></li>
+								</ul>
+							</div>
 							<div class="tout-deets">
 								<div class="tout-text"><% print(text) %></div>
 								<div class="tout-likes">
@@ -63,13 +65,8 @@
                 <div class="span4">
                     <div id="trending-today">
                         <h2 class="uppercase">Trending Today</h2>
-							
-							<!--
-                                $tout_width = 124;
-                                $tout_height = ($tout_width * $tout->tout->video->mp4->height) / ($tout->tout->video->mp4->width);    
-                        	-->
                         	<ul>
-							<script type="text/template" id="upper-right-template">
+								<script type="text/template" id="upper-right-template">
 								<li>	
 									<div class="tout">
 										<div class="trending-video">
@@ -89,7 +86,7 @@
 							</ul>
                     </div>
                     <div id="touts-sections">
-                        <h2 class="uppercase">Touts by Section</h2>
+                        <h2 class="uppercase">Trending Topics</h2>
                         <div class="ul-container" id="section1"> 
                             <h3 class="uppercase">Global Markets</h3>
                             <ul class="touts-section">

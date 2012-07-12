@@ -25,7 +25,17 @@ var MainToutView = ToutView.extend({
 	template:  _.template($('#main-template').html()),
 	
 	events: {
-		'click': 'makeActive'
+		'click': 'makeActive',
+		'mouseover': 'showShareBar',
+		'mouseout': 'hideShareBar'
+	},
+	
+	showShareBar: function() {
+		this.$el.find('.share-bar').animate({marginTop: '0'}, 'fast');
+	},
+	
+	hideShareBar: function() {
+		this.$el.find('.share-bar').animate({marginTop: '45px'}, 'fast');
 	},
 	
 	makeActive: function() {
@@ -124,7 +134,9 @@ var app = {
 		main: '579h3s',
 		trending: 'r7stfb',
 		section1: 'gc5hk1',
-		section2: 'k6xico'
+		section2: 'k6xico',
+		section3: 'iuyhdd',
+		section4: 'xwpdww'
 		},
 	
 	callAjax: function (streamID, startPage, perPage) {
