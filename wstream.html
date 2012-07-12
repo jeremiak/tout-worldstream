@@ -108,20 +108,21 @@
                 </div>
             </div>
         </div>
+        
         <script src="js/video.js"></script>
         <script src="js/jquery.js"></script>
         <script src="js/underscore/underscore.js"></script>
         <script src="js/backbone/backbone.js"></script>
-
         <script src="js/stream.js"></script>
+        
         <script type="text/javascript">
         $(document).ready(function(){
 			console.log('doc ready');
 			
-			var main = app.createBoundStream(MainToutView, '.span8');
-			var trending = app.createBoundStream(TrendingToutView, '#trending-today ul');
-			var section1 = app.createBoundStream(SectionToutView, '#section1 ul');
-			var section2 = app.createBoundStream(SectionToutView, '#section2 ul');
+			var main = app.createBoundStream(app.views.MainToutView, '.span8');
+			var trending = app.createBoundStream(app.views.TrendingToutView, '#trending-today ul');
+			var section1 = app.createBoundStream(app.views.SectionToutView, '#section1 ul');
+			var section2 = app.createBoundStream(app.views.SectionToutView, '#section2 ul');
 	
 			app.loadMoreTouts(main, app.streamID['main'], 2, 15);
 			app.loadMoreTouts(trending, app.streamID['trending'], 2, 3);

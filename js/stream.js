@@ -19,13 +19,13 @@ var app = {
 			initialize: function() {
 				var vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
 				this.set('vidheight', vidHeight);
-			},
+			}
 		})
 	},
 	
 	collections: {
 		Stream: Backbone.Collection.extend({
-			model: Tout
+			model: app.models.Tout
 		})
 	},
 	
