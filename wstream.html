@@ -7,8 +7,6 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
     
         <link rel="stylesheet" href="css/styles.css">
-        
-        <script src="http://vjs.zencdn.net/c/video.js"></script>
     </head>
     <body>
         <div class="black-back">
@@ -22,7 +20,7 @@
                 <div class="span8">
                 	<h2 class="uppercase">World Stream</h2> 
 					<script id="video-player" type="text/template">
-						<div class="video-player">
+						<div class="video-player" style="visibility:hidden;height:0;width:474px;">
 							<video id="<% print(uid) %>" class="video-js vjs-default-skin" height="<% print(video.mp4.height) %>px" width="<% print(video.mp4.width) %>px">
 								<source src="<% print(video.mp4.http_url) %>" type='video/mp4' />
 							</video>
@@ -110,10 +108,10 @@
                 </div>
             </div>
         </div>
-        <script src="/lib/jquery.js"></script>
-        <script src="/lib/underscore/underscore.js"></script>
-        <script src="/lib/backbone/backbone.js"></script>
-        <script src="js/tout_video.js"></script> 
+        <script src="js/video.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/underscore/underscore.js"></script>
+        <script src="js/backbone/backbone.js"></script>
 
         <script src="js/stream.js"></script>
         <script type="text/javascript">
