@@ -26,8 +26,8 @@ var MainToutView = ToutView.extend({
 	
 	events: {
 		'click': 'makeActive',
-		'mouseover': 'showShareBar',
-		'mouseout': 'hideShareBar'
+		'mouseenter': 'showShareBar',
+		'mouseleave': 'hideShareBar'
 	},
 	
 	showShareBar: function() {
