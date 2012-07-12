@@ -1,131 +1,3 @@
-
-
-var Tout = Backbone.Model.extend({
-	initialize: function() {
-		var vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
-		this.set('vidheight', vidHeight);
-	},
-
-});
-
-var Stream = Backbone.Collection.extend({
-	model: Tout
-});
-
-var ToutView = Backbone.View.extend({
-	render: function () {
-		$(this.el).html(this.template(this.model.toJSON()));
-    	return this;
-	}
-});
-
-var MainToutView = ToutView.extend({
-	tagName: 'div',
-	className: 'tout inactive',
-	template:  _.template($('#main-template').html()),
-	
-	events: {
-		'click': 'makeActive',
-		'mouseenter': 'showShareBar',
-		'mouseleave': 'hideShareBar',
-		'cleanupVideo': 'cleanup'
-	},
-	
-	showShareBar: function() {
-		this.$el.find('.share-bar').animate({marginTop: '0'}, 'fast');
-	},
-	
-	hideShareBar: function() {
-		this.$el.find('.share-bar').animate({marginTop: '45px'}, 'fast');
-	},
-	
-	cleanup: function() {
-		// pause video
-		_V_(this.model.attributes.uid).pause();
-				
-		// remove video player
-		this.$el.find('.video-player').remove();
-		
-		// but show the poster and Tout details
-		this.$el.find('.vid-image').show();
-		this.$el.find('.tout-deets').show();
-	},
-	
-	makeActive: function() {
-		var active = this.model.attributes.uid === app.active.id,
-		state = app.active.state;
-		
-		if (active==true) {
-			var myPlayer = _V_(this.model.attributes.uid);
-			if (state=='paused') {
-				myPlayer.play();
-				app.active.state = 'playing';
-			}
-			else if (state=='playing') {
-				var timeLeft = myPlayer.duration() - myPlayer.currentTime();
-			
-				if (timeLeft != 0) {
-					myPlayer.pause();
-					app.active.state = 'paused';
-				}
-			}
-		}
-		else if (active==false) {
-			if (app.active.id != '' ) {
-				$('#vid-' + app.active.id).parents('.tout').trigger('cleanupVideo');	
-			}
-		
-			// apply the video data to the video template
-			var v = _.template($('#video-player').html(), this.model.toJSON()), 
-			parentDiv = $('#vid-'+this.model.attributes.uid),
-			self = this;
-
-			// add the video player
-			parentDiv.prepend(v);
-			
-			// when the video player is ready, set to zero and then play
-			_V_(this.model.attributes.uid).ready(function() {
-				var top = $(parentDiv).position().top, 
-				$vidPlayer = parentDiv.find('.video-player');
-				
-				console.log(top-20);
-				$(document).scrollTop(top-20);
-				
-				parentDiv.find('.vid-image').hide();
-				parentDiv.find('.tout-deets').hide();
-				parentDiv.find('.share-bar-container').hide();
-				
-				$vidPlayer.css('visibility', 'visible');
-				$vidPlayer.animate({height: 300}, 'fast');
-							
-				this.addEvent('ended', function(e) {
-					var $next = $('#' + e.target.id).parents('.tout').next();
-					app.active.state = 'ended';
-					
-					self.$el.trigger('cleanupVideo');
-					$next.trigger('click');
-				});
-				
-				this.play();
-				app.active.state = 'playing';
-				
-			});
-			
-			// make sure the global scope knows which video is currently active
-			app.active.id = this.model.attributes.uid;
-		}
-	}
-});
-
-var TrendingToutView = ToutView.extend({
-	tagName: 'li',
-	template: _.template($('#upper-right-template').html())
-});
-
-var SectionToutView = ToutView.extend({
-	template: _.template($('#lower-right-template').html())
-});
-
 var app = {
 	active: { // holds the currently playing so its available in the global scope
 		id: '',
@@ -141,6 +13,138 @@ var app = {
 		section3: 'iuyhdd',
 		section4: 'xwpdww'
 		},
+	
+	models: {
+		Tout: Backbone.Model.extend({
+			initialize: function() {
+				var vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
+				this.set('vidheight', vidHeight);
+			},
+		})
+	},
+	
+	collections: {
+		Stream: Backbone.Collection.extend({
+			model: Tout
+		})
+	},
+	
+	views: {
+		ToutView: Backbone.View.extend({
+			render: function () {
+				$(this.el).html(this.template(this.model.toJSON()));
+				return this;
+			}
+		}),
+		
+		MainToutView: app.views.ToutView.extend({
+			tagName: 'div',
+			className: 'tout inactive',
+			template:  _.template($('#main-template').html()),
+			
+			events: {
+				'click': 'makeActive',
+				'mouseenter': 'showShareBar',
+				'mouseleave': 'hideShareBar',
+				'cleanupVideo': 'cleanup'
+			},
+			
+			showShareBar: function() {
+				this.$el.find('.share-bar').animate({marginTop: '0'}, 'fast');
+			},
+			
+			hideShareBar: function() {
+				this.$el.find('.share-bar').animate({marginTop: '45px'}, 'fast');
+			},
+			
+			cleanup: function() {
+				// pause video
+				_V_(this.model.attributes.uid).pause();
+						
+				// remove video player
+				this.$el.find('.video-player').remove();
+				
+				// but show the poster and Tout details
+				this.$el.find('.vid-image').show();
+				this.$el.find('.tout-deets').show();
+			},
+			
+			makeActive: function() {
+				var active = this.model.attributes.uid === app.active.id,
+				state = app.active.state;
+				
+				if (active==true) {
+					var myPlayer = _V_(this.model.attributes.uid);
+					if (state=='paused') {
+						myPlayer.play();
+						app.active.state = 'playing';
+					}
+					else if (state=='playing') {
+						var timeLeft = myPlayer.duration() - myPlayer.currentTime();
+					
+						if (timeLeft != 0) {
+							myPlayer.pause();
+							app.active.state = 'paused';
+						}
+					}
+				}
+				else if (active==false) {
+					if (app.active.id != '' ) {
+						$('#vid-' + app.active.id).parents('.tout').trigger('cleanupVideo');	
+					}
+				
+					// apply the video data to the video template
+					var v = _.template($('#video-player').html(), this.model.toJSON()), 
+					parentDiv = $('#vid-'+this.model.attributes.uid),
+					self = this;
+		
+					// add the video player
+					parentDiv.prepend(v);
+					
+					// when the video player is ready, set to zero and then play
+					_V_(this.model.attributes.uid).ready(function() {
+						var top = $(parentDiv).position().top, 
+						$vidPlayer = parentDiv.find('.video-player');
+						
+						console.log(top-20);
+						$(document).scrollTop(top-20);
+						
+						parentDiv.find('.vid-image').hide();
+						parentDiv.find('.tout-deets').hide();
+						parentDiv.find('.share-bar-container').hide();
+						
+						$vidPlayer.css('visibility', 'visible');
+						$vidPlayer.animate({height: 300}, 'fast');
+									
+						this.addEvent('ended', function(e) {
+							var $next = $('#' + e.target.id).parents('.tout').next();
+							app.active.state = 'ended';
+							
+							self.$el.trigger('cleanupVideo');
+							$next.trigger('click');
+						});
+						
+						this.play();
+						app.active.state = 'playing';
+						
+					});
+					
+					// make sure the global scope knows which video is currently active
+					app.active.id = this.model.attributes.uid;
+				}
+			}
+		}),
+				
+		TrendingToutView: app.views.ToutView.extend({
+			tagName: 'li',
+			template: _.template($('#upper-right-template').html())
+		}),
+		
+		SectionToutView: app.views.ToutView.extend({
+			template: _.template($('#lower-right-template').html())
+		})
+	
+	},
 	
 	callAjax: function (streamID, startPage, perPage) {
 		if (perPage == undefined) {
@@ -170,13 +174,13 @@ var app = {
 		var touts = t['contents']['touts'];
 		
 		for(var i=0; i<touts.length; i++) {
-			var tout = new Tout(touts[i]['tout']);
+			var tout = new app.models.Tout(touts[i]['tout']);
 			stream.add(tout);
 		}
 	},
 	
 	createBoundStream: function (view, target) {
-		var s = new Stream();
+		var s = new app.collections.Stream();
 		s.on('add', function(tout) {
 			var v = new view({model: tout});
 			$(target).append(v.render().$el);
