@@ -1,3 +1,4 @@
+
 var app = (function () {
 	var active, paginationState, streamID, models, collections, callAjax, loadMoreTouts, createBoundStream, endlessScroll;
 	active = { // holds the currently playing so its available in the global scope
@@ -38,6 +39,7 @@ var app = (function () {
 	});
 		
 	views.MainToutView = views.ToutView.extend({
+		active: active,
 		tagName: 'div',
 		className: 'tout inactive',
 		template:  _.template($('#main-template').html()),
@@ -70,11 +72,14 @@ var app = (function () {
 		},
 		
 		makeActive: function() {
-			var active = this.model.attributes.uid === app.active.id,
+			var isActive = this.model.attributes.uid === app.active.id,
 			state = active.state;
+			console.log(self);
+			console.log(this.model.attributes.uid + ' + ' + active.id);
 			
-			if (active==true) {
+			if (isActive === true) {
 				var myPlayer = _V_(this.model.attributes.uid);
+				console.log(myPlayer);
 				if (state=='paused') {
 					myPlayer.play();
 					active.state = 'playing';
@@ -88,7 +93,7 @@ var app = (function () {
 					}
 				}
 			}
-			else if (active==false) {
+			else if (isActive === false) {
 				if (active.id != '' ) {
 					$('#vid-' + active.id).parents('.tout').trigger('cleanupVideo');	
 				}
