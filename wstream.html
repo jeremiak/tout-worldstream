@@ -21,7 +21,7 @@
                 	<h2 class="uppercase">World Stream</h2> 
 					<script id="video-player" type="text/template">
 						<div class="video-player" style="visibility:hidden;height:0;width:474px;">
-							<video id="<% print(uid) %>" class="video-js vjs-default-skin" height="<% print(video.mp4.height) %>px" width="<% print(video.mp4.width) %>px">
+							<video controls id="<% print(uid) %>" class="video-js vjs-default-skin" height="<% print(video.mp4.height) %>px" width="<% print(video.mp4.width) %>px">
 								<source src="<% print(video.mp4.http_url) %>" type='video/mp4' />
 							</video>
 						</div>
