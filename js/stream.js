@@ -139,14 +139,9 @@ var app = (function () {
 			}
 		}
 	});
-			
-	views.TrendingToutView = views.ToutView.extend({
-		tagName: 'li',
-		template: _.template($('#upper-right-template').html())
-	});
 	
 	views.SectionToutView = views.ToutView.extend({
-		template: _.template($('#lower-right-template').html())
+		template: _.template($('#right-template').html())
 	});
 	
 	

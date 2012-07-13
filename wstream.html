@@ -61,34 +61,11 @@
 					</script>
                 </div>
                 <div class="span4">
-                    <div id="trending-today">
-                        <h2 class="uppercase">Trending Today</h2>
-                        	<ul>
-								<script type="text/template" id="upper-right-template">
-								<li>	
-									<div class="tout">
-										<div class="trending-video">
-											<div class="video">
-												<img src="<% print(image.poster.http_url) %>" width="124">
-											</div> 
-										</div>
-										<div class="trending-video-info">
-											<span class="trending-text"><p><% print(text) %></p></span>
-											<span class="trending-create-date"><p><%  %></p></span> 
-											<span class="trending-touter">By: <a class="uppercase" href="http://www.tout.com/u/<% print(user.uid) %>"><% print(user.fullname || user.friendly_name) %></a></span>
-										</div>
-										<div class="clear"><br /></div>    
-									</div>
-								</li>
-							</script>
-							</ul>
-                    </div>
-                    <div id="touts-sections">
-                        <h2 class="uppercase">Trending Topics</h2>
-                        <div class="ul-container" id="section1"> 
-                            <h3 class="uppercase">Global Markets</h3>
+                    <div class="touts-sections">
+                        <h2 class="uppercase">Inside WSJ</h2>
+                        <div class="ul-container" id="insidewsj"> 
                             <ul class="touts-section">
-								<script id="lower-right-template" type="text/template">								
+								<script id="right-template" type="text/template">								
 									<li class="tout-in-section">
 									   <div class="video">
 											<video id="<% print(uid) %>" class="video-js vjs-default-skin" preload="auto" width="110px" height="<% print( (110*video.mp4.height)/video.mp4.width ) %>px" poster="<% print(image.thumbnail.http_url) %>" data-setup="{}">
@@ -97,6 +74,14 @@
 										</div> 
 									</li>
 								</script>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="touts-sections">
+                        <h2 class="uppercase">Trending Topics</h2>
+                        <div class="ul-container" id="section1"> 
+                            <h3 class="uppercase">Global Markets</h3>
+                            <ul class="touts-section">
                             </ul>
                         </div>
                         <div class="ul-container" id="section2"> 
@@ -121,11 +106,11 @@
 			console.log('doc ready');
 			
 			var main = app.createBoundStream(app.views.MainToutView, '.span8');
-			var trending = app.createBoundStream(app.views.TrendingToutView, '#trending-today ul');
+			var trending = app.createBoundStream(app.views.SectionToutView, '#insidewsj ul');
 			var section1 = app.createBoundStream(app.views.SectionToutView, '#section1 ul');
 			var section2 = app.createBoundStream(app.views.SectionToutView, '#section2 ul');
 	
-			app.loadMoreTouts(main, app.streamID['main'], 2, 15);
+			app.loadMoreTouts(main, app.streamID['main'], 2, 10);
 			app.loadMoreTouts(trending, app.streamID['trending'], 2, 3);
 			app.loadMoreTouts(section1, app.streamID['section1'], 2, 10);
 			app.loadMoreTouts(section2, app.streamID['section2'], 2, 10);
