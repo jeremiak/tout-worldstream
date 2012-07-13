@@ -89,6 +89,21 @@
                             <ul class="touts-section">
                             </ul>
                         </div>
+                        <div class="ul-container" id="section3"> 
+                            <h3 class="uppercase">Capital Markets</h3>
+                            <ul class="touts-section">
+                            </ul>
+                        </div>
+                        <div class="ul-container" id="section4"> 
+                            <h3 class="uppercase">Olympics</h3>
+                            <ul class="touts-section">
+                            </ul>
+                        </div>
+                        <div class="ul-container" id="section5"> 
+                            <h3 class="uppercase">Technology</h3>
+                            <ul class="touts-section">
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,11 +124,17 @@
 			var trending = app.createBoundStream(app.views.SectionToutView, '#insidewsj ul');
 			var section1 = app.createBoundStream(app.views.SectionToutView, '#section1 ul');
 			var section2 = app.createBoundStream(app.views.SectionToutView, '#section2 ul');
+			var section3 = app.createBoundStream(app.views.SectionToutView, '#section3 ul');
+			//var section4 = app.createBoundStream(app.views.SectionToutView, '#section4 ul');
+			//var section5 = app.createBoundStream(app.views.SectionToutView, '#section5 ul');
 	
 			app.loadMoreTouts(main, app.streamID['main'], 2, 10);
 			app.loadMoreTouts(trending, app.streamID['trending'], 2, 3);
 			app.loadMoreTouts(section1, app.streamID['section1'], 2, 10);
 			app.loadMoreTouts(section2, app.streamID['section2'], 2, 10);
+			app.loadMoreTouts(section3, app.streamID['section3'], 2, 10);
+			//app.loadMoreTouts(section4, app.streamID['section4'], 2, 10);
+			//app.loadMoreTouts(section5, app.streamID['section5'], 2, 10);
 			
 			$(document).scroll(function() { 
 				app.endlessScroll(main);  

@@ -194,6 +194,7 @@ div.ul-container {
   background-color: #e4e4e4;
   border-radius: 4px;
   margin-top: 15px;
+  min-height: 250px;
   width: 300px;
   overflow-x: scroll;
   overflow-y: hidden; }
@@ -211,7 +212,7 @@ div.ul-container h3 {
   padding-left: 8px;
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 140px;
+  height: 190px;
   width: 670px; }
 
 .touts-section .tout-in-section {
@@ -229,6 +230,9 @@ div div.clear {
 /* overriding video.js */
 .video-js .vjs-tech {
   position: static; }
+
+.touts-section .video-js .vjs-tech {
+  height: 170px; }
 
 img.vjs-poster {
   display: none; }
