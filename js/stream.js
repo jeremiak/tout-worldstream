@@ -11,7 +11,7 @@ var app = (function () {
 		trending: 'r7stfb',
 		section1: 'gc5hk1',
 		section2: 'k6xico',
-		section3: '124ssi',
+		section3: '9j6izp',
 		section4: 'xwpdww',
 		section5: ''
 		};
