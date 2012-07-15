@@ -97,12 +97,6 @@ div.video-container {
 div.video {
   padding: 8px; }
 
-div.video div.play-button {
-  background-color: black;
-  width: 80px;
-  height: 80px;
-  border-radius: 80px; }
-
 div.inactive div.vid-image {
   background-color: black;
   height: 200px;
@@ -110,6 +104,14 @@ div.inactive div.vid-image {
 
 div.inactive div.vid-image img {
   margin: 0 auto; }
+
+img.play-button {
+  position: relative;
+  left: 43%;
+  z-index: 2; }
+
+div.inactive div.vid-image img.poster {
+  margin-left: 44px; }
 
 div.video-player {
   background-color: black; }
