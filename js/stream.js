@@ -7,7 +7,7 @@ var app = (function () {
 	};			
 	paginationState = 1;		// holds the current page for the main stream to enable endless scrolling
 	streamID =  {
-		main: 'il18hs',
+		main: 'tl86a3',
 		trending: 'iuyhdd',
 		section1: 'e5x9z2',
 		section2: '3pm1sf',
@@ -20,7 +20,13 @@ var app = (function () {
 		Tout: Backbone.Model.extend({
 			initialize: function() {
 				var vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
-				this.set('vidheight', vidHeight);
+                // account for the different orientations of video, and set the playbutton accordingly
+                if (vidHeight > 600) {
+                    this.set('playbtn', 'vertical');
+                }
+                else {
+                    this.set('playbtn', 'horizontal');
+                }
 			}
 		})
 	};
@@ -199,7 +205,7 @@ var app = (function () {
 	
 		if (r>.59 && r<.61) {
 			console.log(p);
-			app.loadMoreTouts(stream, '579h3s', p);
+			app.loadMoreTouts(stream, app.streamID['main'], p);
 			app['paginationState']++;
 		}
 	};

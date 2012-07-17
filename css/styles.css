@@ -110,6 +110,9 @@ img.play-button {
   left: 43%;
   z-index: 2; }
 
+img.vertical {
+  top: -40%; }
+
 div.inactive div.vid-image img.poster {
   margin-left: 44px; }
 
