@@ -7,6 +7,8 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
     
         <link rel="stylesheet" href="css/styles.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </head>
     <body>
         <div class="black-back">
@@ -132,11 +134,11 @@
 			//var section4 = app.createBoundStream(app.views.SectionToutView, '#section4 ul');
 			//var section5 = app.createBoundStream(app.views.SectionToutView, '#section5 ul');
 	
-			app.loadMoreTouts(main, app.streamID['main'], 2, 10);
-			app.loadMoreTouts(trending, app.streamID['trending'], 2, 3);
-			app.loadMoreTouts(section1, app.streamID['section1'], 2, 10);
-			app.loadMoreTouts(section2, app.streamID['section2'], 2, 10);
-			app.loadMoreTouts(section3, app.streamID['section3'], 2, 10);
+			app.loadMoreTouts(main, app.streamID['main'], 1, 10);
+			app.loadMoreTouts(trending, app.streamID['trending'], 1, 3);
+			app.loadMoreTouts(section1, app.streamID['section1'], 1, 10);
+			app.loadMoreTouts(section2, app.streamID['section2'], 1, 10);
+			app.loadMoreTouts(section3, app.streamID['section3'], 1, 10);
 			//app.loadMoreTouts(section4, app.streamID['section4'], 2, 10);
 			//app.loadMoreTouts(section5, app.streamID['section5'], 2, 10);
 			
