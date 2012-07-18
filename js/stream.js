@@ -75,6 +75,7 @@ var app = (function () {
 			
 			// but show the poster and Tout details
 			this.$el.find('.vid-image').show();
+            this.$el.find('.share-bar-container').show();
 			this.$el.find('.tout-deets').show();
 		},
 		
