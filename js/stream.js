@@ -158,11 +158,12 @@ var app = (function () {
 			perPage = 15;
 		}
 		
-		var ajax_url = 'http://beta-api.tout.com/api/v1/streams/'+streamID+'/touts.json?' + encodeURIComponent('per_page='+perPage+'&page='+startPage);
-	//	var ajax_url = 'http://api.tout.com/api/v1/latest.json?' + encodeURIComponent('per_page='+perPage+'&page='+startPage);
+		var ajax_url = 'http://api.tout.com/api/v1/streams/'+streamID+'/touts.json?per_page='+perPage+'&page='+startPage;
 		var result="";
-		$.ajax({
-			url:'http://localhost/ba-simple-proxy.php?url=' + ajax_url,
+		
+        console.log(ajax_url);
+        $.ajax({
+            url: ajax_url,
 			async: false,
 			success:function(data) {
 				result = data; 
@@ -172,13 +173,9 @@ var app = (function () {
 	};
 	
 	loadMoreTouts = function (stream, streamID, startPage, perPage) {
-		var t = this.callAjax(streamID, startPage, perPage);
-	
-		while(t['status']['http_code'] != 200) {
-			console.log('waiting on ajax call');
-		}
+		var t = this.callAjax(streamID, startPage, perPage), touts='';
 		
-		var touts = t['contents']['touts'];
+        touts = t['touts'];
 		
 		for(var i=0; i<touts.length; i++) {
 			var tout = new app.models.Tout(touts[i]['tout']);
