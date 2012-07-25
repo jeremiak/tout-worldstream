@@ -107,11 +107,14 @@ div.inactive div.vid-image img {
 
 img.play-button {
   position: relative;
-  left: 43%;
+  left: 21%;
   z-index: 2; }
 
 img.vertical {
-  top: -40%; }
+  top: -5%; }
+
+img.horizontal {
+  top: 35%; }
 
 div.inactive div.vid-image img.poster {
   margin-left: 44px; }
