@@ -117,7 +117,8 @@ img.horizontal {
   top: 35%; }
 
 div.inactive div.vid-image img.poster {
-  margin-left: 44px; }
+  margin-left: 44px;
+  /*    padding-top: 30px;  */ }
 
 div.video-player {
   background-color: black; }
@@ -224,12 +225,10 @@ div.ul-container h3 {
   width: 670px; }
 
 .touts-section .tout-in-section {
-  background-color: white;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
+  /*  @include tout-elements;     */
   float: left;
   margin-right: 8px;
-  width: 126px; }
+  width: 160px; }
 
 div div.clear {
   clear: both;

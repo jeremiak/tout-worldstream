@@ -129,6 +129,7 @@ img.horizontal {
 }
 div.inactive div.vid-image img.poster {
 	margin-left: 44px;
+/*    padding-top: 30px;  */
 }
 div.video-player {
 	background-color:black;
@@ -238,10 +239,10 @@ div.ul-container h3 {
     width:670px;
 }
 .touts-section .tout-in-section {
-    @include tout-elements;
+    /*  @include tout-elements;     */
     float:left;
     margin-right:8px;
-    width: 126px;
+    width: 160px;
 }
 
 div div.clear {
