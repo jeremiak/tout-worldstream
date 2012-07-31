@@ -43,6 +43,22 @@ ul {
     height:900px;
 */
 }
+#blanket {
+    background-color: rgba(0, 0, 0, .8);
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:1000%;
+    z-index:3;
+    visibility:hidden;
+}
+div#blanket div.video-player {
+/*    visibility: visible;      */
+    width:400px;
+    background-color:white;
+    padding:20px;
+}
 div.black-back {
     background-color: rgb(26, 28, 29);
     margin-bottom:20px;
