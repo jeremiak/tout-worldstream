@@ -71,11 +71,15 @@
                             <ul class="touts-section">
 								<script id="right-template" type="text/template">								
                                     <li class="tout-in-section">
-                                       <img class="play-button <% print(playbtn) %>" src="img/wsj-play.png">
-									   <div class="video">
-											<video id="<% print(uid) %>" class="video-js vjs-default-skin" preload="auto" width="110px" height="<% print( (110*video.mp4.height)/video.mp4.width ) %>px" poster="<% print(image.thumbnail.http_url) %>" data-setup="{}">
+                                       <img class="play-button-section <% print(playbtn) %>" src="img/wsj-play.png">
+									   <div class="video" style="background-image:url(<% print(image.thumbnail.http_url) %>); width:130px; height:90px;">
+                                           <!-- 
+                                            <img width="130px" src="<% print(image.thumbnail.http_url) %>" >
+                                           
+                                            <video id="<% print(uid) %>" class="video-js vjs-default-skin" preload="auto" width="110px" height="<% print( (110*video.mp4.height)/video.mp4.width ) %>px" poster="<% print(image.thumbnail.http_url) %>" data-setup="{}">
 												<source src="<% print(video.mp4.http_url) %>" type='video/mp4'>
-											</video>
+                                            </video>
+                                            -->
 										</div> 
 									</li>
 								</script>

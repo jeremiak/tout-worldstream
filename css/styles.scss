@@ -217,7 +217,7 @@ div.ul-container {
     background-color: rgb(228, 228, 228);
     border-radius: 4px;
     margin-top:15px;
-    min-height:250px;
+    /*min-height:250px; */
     width:300px;
     overflow-x:scroll;
     overflow-y:hidden;
@@ -229,9 +229,7 @@ div.ul-container h3 {
 }
 .touts-section {
     list-style-type:none;
-    margin-top:10px;
     margin-left:0px;
-    padding-top:8px;
     padding-left:8px;
     overflow-x:scroll;
     overflow-y:hidden;
@@ -243,6 +241,13 @@ div.ul-container h3 {
     float:left;
     margin-right:8px;
     width: 160px;
+}
+
+.tout-in-section img.play-button-section {
+    position:relative;
+    left:10px;
+    top:100px;
+    z-index:2;
 }
 
 div div.clear {
