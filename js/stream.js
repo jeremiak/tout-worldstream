@@ -7,7 +7,7 @@ var app = (function () {
 	};			
 	paginationState = 1;		// holds the current page for the main stream to enable endless scrolling
 	streamID =  {
-		main: 'tl86a3',
+		main: 'a0vs6c',
 		trending: 'iuyhdd',
 		section1: 'e5x9z2',
 		section2: '3pm1sf',
@@ -152,14 +152,12 @@ var app = (function () {
 		template: _.template($('#right-template').html())
 	});
 	
-	
-	
 	callAjax = function (streamID, startPage, perPage) {
 		if (perPage == undefined) {
 			perPage = 15;
 		}
 		
-		var result='', ajax_url = 'http://api.tout.com/api/v1/streams/'+streamID+'/touts.json?access_token=ee679c0ef854e73e4a1708e32ee512866ac582a7b4ef48de494183a24aa2b003&per_page='+perPage+'&page='+startPage;
+		var result='', ajax_url = 'https://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?access_token=4bfe906789a873eb7d9218af99ed864dfa3e11acd213bf0dabb372103872c996&per_page='+perPage+'&page='+startPage;
         
         $.ajax({
             url: ajax_url,
