@@ -42,7 +42,7 @@
 									<img src="<% print(user.avatar.profile.http_url) %>">
 								</div>
 								<div class="username"><a href="http://www.tout.com/u/<% print(user.uid) %>"><% print(user.fullname || user.friendly_name) %></a></div>
-								<div class="time"></div>
+                                <div class="time"><% print(time_text) %></div>
 							</div>
 						<div class="span6 video-container" id="vid-<% print(uid) %>">
 							<div class="vid-image">

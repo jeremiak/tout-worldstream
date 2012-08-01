@@ -13,7 +13,8 @@ var app = (function () {
 	models = {
 		Tout: Backbone.Model.extend({
 			initialize: function() {
-				var vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
+				var time_text='', vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
+                this.set('time_text', time_text);
                 // account for the different orientations of video, and set the playbutton accordingly
                 if (vidHeight > 600) {
                     this.set('playbtn', 'vertical');
