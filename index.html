@@ -16,7 +16,7 @@
                 <video controls id="fuck" class="video-js vjs-default-skin" height="300px">
                     <source src="http://videos.tout.com/watermark/mp4/0fe583a5ae6a109ed2809994f1fb00f3.mp4" type='video/mp4' />
                 </video>
-                <div class="clear"><br /></div>
+                <div class="clear"></div>
             </div>
         </div>
         <div class="black-back">
@@ -73,57 +73,8 @@
 					</script>
                 </div>
                 <div class="span4">
-                    <div class="touts-sections">
-                        <h2 class="uppercase">Inside WSJ</h2>
-                        <div class="ul-container" id="insidewsj"> 
-                            <ul class="touts-section">
-								<script id="right-template" type="text/template">								
-                                    <li class="tout-in-section">
-                                       <img class="play-button-section <% print(playbtn) %>" src="img/wsj-play.png">
-									   <div class="video" style="background-image:url(<% print(image.thumbnail.http_url) %>); width:130px; height:90px;">
-                                           <!-- 
-                                            <img width="130px" src="<% print(image.thumbnail.http_url) %>" >
-                                           
-                                            <video id="<% print(uid) %>" class="video-js vjs-default-skin" preload="auto" width="110px" height="<% print( (110*video.mp4.height)/video.mp4.width ) %>px" poster="<% print(image.thumbnail.http_url) %>" data-setup="{}">
-												<source src="<% print(video.mp4.http_url) %>" type='video/mp4'>
-                                            </video>
-                                            -->
-										</div> 
-									</li>
-								</script>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="touts-sections">
-                        <h2 class="uppercase">Trending Topics</h2>
-                        <div class="ul-container" id="section1"> 
-                            <h3 class="uppercase">Global Markets</h3>
-                            <ul class="touts-section">
-                            </ul>
-                        </div>
-                        <div class="ul-container" id="section2"> 
-                            <h3 class="uppercase">Personal Finance</h3>
-                            <ul class="touts-section">
-                            </ul>
-                        </div>
-                        <div class="ul-container" id="section3"> 
-                            <h3 class="uppercase">Capital Markets</h3>
-                            <ul class="touts-section">
-                            </ul>
-                        </div>
-                        <!-- commenting out until ajax callbacks are implemented so that load time isn't destroyed
-                        <div class="ul-container" id="section4"> 
-                            <h3 class="uppercase">Olympics</h3>
-                            <ul class="touts-section">
-                            </ul>
-                        </div>
-                        <div class="ul-container" id="section5"> 
-                            <h3 class="uppercase">Technology</h3>
-                            <ul class="touts-section">
-                            </ul>
-                        </div>
-                        -->
-                    </div>
+                    <img src="img/wsj-side.png" />
+                    
                 </div>
             </div>
         </div>
@@ -140,18 +91,18 @@
 			console.log('doc ready, loading streams');
 			
 			var main = app.createBoundStream(app.views.MainToutView, '.span8');
-			var trending = app.createBoundStream(app.views.SectionToutView, '#insidewsj ul');
-			var section1 = app.createBoundStream(app.views.SectionToutView, '#section1 ul');
-			var section2 = app.createBoundStream(app.views.SectionToutView, '#section2 ul');
-			var section3 = app.createBoundStream(app.views.SectionToutView, '#section3 ul');
+			//var trending = app.createBoundStream(app.views.SectionToutView, '#insidewsj ul');
+			//var section1 = app.createBoundStream(app.views.SectionToutView, '#section1 ul');
+			//var section2 = app.createBoundStream(app.views.SectionToutView, '#section2 ul');
+			//var section3 = app.createBoundStream(app.views.SectionToutView, '#section3 ul');
 			//var section4 = app.createBoundStream(app.views.SectionToutView, '#section4 ul');
 			//var section5 = app.createBoundStream(app.views.SectionToutView, '#section5 ul');
 	
 			app.loadMoreTouts(main, app.streamID['main'], 1, 10);
-			app.loadMoreTouts(trending, app.streamID['trending'], 1, 10);
-			app.loadMoreTouts(section1, app.streamID['section1'], 1, 10);
-			app.loadMoreTouts(section2, app.streamID['section2'], 1, 10);
-			app.loadMoreTouts(section3, app.streamID['section3'], 1, 10);
+			//app.loadMoreTouts(trending, app.streamID['trending'], 1, 10);
+			//app.loadMoreTouts(section1, app.streamID['section1'], 1, 10);
+			//app.loadMoreTouts(section2, app.streamID['section2'], 1, 10);
+			//app.loadMoreTouts(section3, app.streamID['section3'], 1, 10);
 			//app.loadMoreTouts(section4, app.streamID['section4'], 2, 10);
 			//app.loadMoreTouts(section5, app.streamID['section5'], 2, 10);
 			

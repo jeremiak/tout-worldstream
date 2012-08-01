@@ -147,10 +147,7 @@ var app = (function () {
 			}
 		}
 	});
-	
-	views.SectionToutView = views.ToutView.extend({
-		template: _.template($('#right-template').html())
-	});
+   
 	
 	callAjax = function (streamID, startPage, perPage) {
 		if (perPage == undefined) {
