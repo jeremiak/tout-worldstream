@@ -8,12 +8,6 @@ var app = (function () {
 	paginationState = 1;		// holds the current page for the main stream to enable endless scrolling
 	streamID =  {
 		main: 'a0vs6c',
-		trending: 'iuyhdd',
-		section1: 'e5x9z2',
-		section2: '3pm1sf',
-		section3: 'z9q9rx',
-		section4: '',
-		section5: ''
 		};
 	
 	models = {
