@@ -13,7 +13,28 @@ var app = (function () {
 	models = {
 		Tout: Backbone.Model.extend({
 			initialize: function() {
-				var time_text='', vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
+				var cur, d, diff, time_text='', vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
+                
+                cur = new Date();
+                d = new Date(this.attributes.recorded_at);
+                diff = (((cur - d) / 1000) / 60);
+                
+
+                if (diff<5) {
+                    time_text = 'moments ago';
+                }
+                else if (diff>5 && diff<60) {
+                    time_text = Math.round(diff) + ' minutes ago';
+                } else if (diff>60 && diff<120) {
+                    time_text = '1 hour ago';
+                } else if (diff>120 && diff<1440) {
+                    time_text = Math.round(diff/60) + ' hours ago';
+                } else if (diff>1440 && diff < 2880) {
+                    time_text = '1 day ago';
+                } else {
+                    time_text = Math.round(diff/1440) + ' days ago';
+                }
+
                 this.set('time_text', time_text);
                 // account for the different orientations of video, and set the playbutton accordingly
                 if (vidHeight > 600) {
