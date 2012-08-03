@@ -134,14 +134,13 @@ div.inactive div.vid-image img{
 }
 img.play-button {
 	position:relative;
-	left:21%;
+	left:45%;
     z-index:2;
 }
 img.vertical {
-    top:-5%;
+    top:-40%;
 }
 img.horizontal {
-    top: 35%;
 }
 div.inactive div.vid-image img.poster {
 	margin-left: 44px;
@@ -151,9 +150,10 @@ div.video-player {
 	background-color:black;
 }
 .share-bar-container {
-	background-color:black;
 	height:45px;
-	overflow-y:hidden;
+	position:relative;
+    top:-45px;
+    overflow-y:hidden;
 }
 ul.share-bar {
 	background-color: rgba(0, 0, 0, 0.5);
@@ -182,16 +182,9 @@ div.tout-deets > div {
 div.tout-text {
     float:left;
     margin-left:15px;
-    width:330px;
-}
-div.tout-likes {
-    float:right;
-    width:60px;
-    margin-right:10px;
-}
-
-div.tout-likes span {
-	padding-top:5px;
+    position:relative;
+    top:-25px;
+    z-index:3;
 }
 
 div#touts-sections {
