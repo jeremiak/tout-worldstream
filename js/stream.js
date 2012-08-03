@@ -14,7 +14,7 @@ var app = (function () {
 		Tout: Backbone.Model.extend({
 			initialize: function() {
 				var cur, d, diff, time_text='', vidHeight = ( (474*this.attributes.video.mp4.height) / this.attributes.video.mp4.width)
-                
+                /*
                 cur = new Date();
                 d = new Date(this.attributes.recorded_at);
                 diff = (((cur - d) / 1000) / 60);
@@ -36,6 +36,10 @@ var app = (function () {
                 }
 
                 this.set('time_text', time_text);
+                */
+                // The logic above is extracted out to moment.js
+                this.set('time_text', moment(this.get('recorded_at')).fromNow());
+
                 // account for the different orientations of video, and set the playbutton accordingly
                 if (vidHeight > 600) {
                     this.set('playbtn', 'vertical');
