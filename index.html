@@ -29,7 +29,8 @@
             <div class="row">
                 <div class="span8">
                 	<h2 class="uppercase">World Stream</h2> 
-					<script id="video-player" type="text/template">
+                    <div id="tout-container">
+                    <script id="video-player" type="text/template">
 						<div class="video-player" style="visibility:hidden;height:0;width:474px;">
 							<video controls id="<% print(uid) %>" class="video-js vjs-default-skin" height="<% print(video.mp4.height) %>px" width="<% print(video.mp4.width) %>px">
 								<source src="<% print(video.mp4.http_url) %>" type='video/mp4' />
@@ -67,7 +68,8 @@
 							</div>
 						</div>
 						<div class="clear"><br></div>
-					</script>
+                    </script>
+                    </div>
                 </div>
                 <div class="span4">
                     <img src="img/wsj-side.png" />
@@ -87,12 +89,13 @@
         $(document).ready(function(){
 			console.log('doc ready, loading streams');
 			
-			var main = app.createBoundStream(app.views.MainToutView, '.span8');
-			app.loadMoreTouts(main, app.streamID['main'], 1, 10);
-			
-			$(document).scroll(function() { 
+			var main = app.createBoundStream(app.views.MainToutView, '#tout-container');
+			app.loadMoreTouts(main, app.streamID['main'], app['paginationState'], 10);
+            app['paginationState']++;
+
+			$('.span8').scroll(function() { 
 				app.endlessScroll(main);  
-			});
+            });
 		});
         </script>
     </body>

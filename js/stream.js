@@ -19,7 +19,7 @@ var app = (function () {
                 d = new Date(this.attributes.recorded_at);
                 diff = (((cur - d) / 1000) / 60);
                 
-
+                
                 if (diff<5) {
                     time_text = 'moments ago';
                 }
@@ -206,11 +206,12 @@ var app = (function () {
 	endlessScroll = function (stream) {
 		p = app['paginationState'];
 		
-		var st = $(document).scrollTop();
-		var dh = $(document).height();
+		var st = $('.span8').scrollTop();
+		var dh = $('#tout-container').height();
 		var r = st/dh;
-	
-		if (r>.59 && r<.61) {
+        console.log(r);
+
+        if (r>.5 && r<.61) {
 			console.log(p);
 			app.loadMoreTouts(stream, app.streamID['main'], p);
 			app['paginationState']++;
