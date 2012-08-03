@@ -119,6 +119,7 @@ div.username a {
 div.video-container {
     @include tout-elements;
     margin-left:14px;
+    height:260px;
     width:475px;
 }
 div.video {
