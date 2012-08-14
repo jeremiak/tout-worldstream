@@ -1,4 +1,3 @@
-
 var app = (function () {
 	var active, paginationState, streamID, models, collections, callAjax, loadMoreTouts, createBoundStream, endlessScroll;
 	active = { // holds the currently playing so its available in the global scope
@@ -174,27 +173,25 @@ var app = (function () {
 			perPage = 15;
 		}
 		
-		var result='', ajax_url = 'https://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?access_token=4bfe906789a873eb7d9218af99ed864dfa3e11acd213bf0dabb372103872c996&per_page='+perPage+'&page='+startPage;
+		var ajax_url = 'https://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?access_token=4bfe906789a873eb7d9218af99ed864dfa3e11acd213bf0dabb372103872c996&per_page='+perPage+'&page='+startPage;
         
-        $.ajax({
-            url: ajax_url,
-			async: false,
-			success:function(data) {
-				result = data; 
-			}
-	   });
-	   return result;
+	        return $.ajax({
+			url: ajax_url,
+			async: false
+		});
 	};
 	
 	loadMoreTouts = function (stream, streamID, startPage, perPage) {
-		var t = this.callAjax(streamID, startPage, perPage), touts='';
+		var whenToutsLoaded = this.callAjax(streamID, startPage, perPage);
 		
-        touts = t['touts'];
-		
-		for(var i=0; i<touts.length; i++) {
-			var tout = new app.models.Tout(touts[i]['tout']);
-			stream.add(tout);
-		}
+		whenToutsLoaded.done(function (data) {
+			var touts = data['touts'];
+
+			for(var i=0; i<touts.length; i++) {
+				var tout = new app.models.Tout(touts[i]['tout']);
+				stream.add(tout);
+			}
+		});
 	};
 	
 	createBoundStream = function (view, target) {
