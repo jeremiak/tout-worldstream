@@ -6,7 +6,7 @@ var app = (function () {
 	};			
 	paginationState = 1;		// holds the current page for the main stream to enable endless scrolling
 	streamID =  {
-		main: 'a0vs6c',
+		main: '249lz7',
 		};
 	
 	models = {
@@ -173,7 +173,7 @@ var app = (function () {
 			perPage = 15;
 		}
 		
-		var ajax_url = 'https://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?access_token=4bfe906789a873eb7d9218af99ed864dfa3e11acd213bf0dabb372103872c996&per_page='+perPage+'&page='+startPage;
+		var ajax_url = 'https://staging.kicktag.com/api/v1/streams/'+streamID+'/touts.json?access_token=ce2df1788f119e946ba32d47894a1a03ec6f86d4ab7e443eb8ed25b2d3e57ae5&per_page='+perPage+'&page='+startPage;
         
 	        return $.ajax({
 			url: ajax_url,
