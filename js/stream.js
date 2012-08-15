@@ -187,6 +187,12 @@ var app = (function () {
 		whenToutsLoaded.done(function (data) {
 			var touts = data['touts'];
 
+            if (typeof data['touts'] === 'undefined') {
+                try {
+                    touts = JSON.parse(data)['touts'];
+                } catch (err) { console.log(err); }
+            }
+
 			for(var i=0; i<touts.length; i++) {
 				var tout = new app.models.Tout(touts[i]['tout']);
 				stream.add(tout);
